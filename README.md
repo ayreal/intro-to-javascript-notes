@@ -7,6 +7,7 @@ let store = { users: [], items: [] };
 // initialize store with key of items and users that each point to an empty array
 
 let userId = 0;
+let itemId = 0;
 
 class User {
   constructor(name) {
@@ -24,8 +25,6 @@ class User {
     });
   }
 }
-
-let itemId = 0;
 
 class Item {
   constructor(price, name, user) {
@@ -69,7 +68,12 @@ item.user();
 // {id: 3, name: 'Freddie'}
 ```
 
+## Closures and Callbacks
+  - Callback methods are a specific application of an inner function being called. Therefore, `this` is also global inside of callbacks passed to our array iterator methods.
+
 ## Lexical Scope (.bind, .call, .apply)
+  - Set `this` value on methods
+  - Borrow methods
 
 ## Arrow Functions
 
@@ -79,7 +83,6 @@ item.user();
 let arrowFunction = function() {
   return "arrow Functions are great!"
 }
-
 
 // updating to use an arrow function
 let arrowFunction = () => {
@@ -116,8 +119,18 @@ person.greet()()
 
 ## Object Manipulation
 - Non-Destructive
-  - Spread operator
-  - Update an existing key-value pair with `Object.assign()`
+  - Spread operator for an object:
+  ```javascript
+  const allCities = ['Los Angeles', ...coolCities];
+  allCities;
+  // => ["Los Angeles", "New York", "San Francisco"]
+  newAllCities = [...allCities]
+  // => ["Los Angeles", "New York", "San Francisco"]
+  allCities === newAllCities
+  // => false
+
+  ```
+  - Update an existing key-value pair with `Object.assign()`:
     ```javascript
     const newPerson = Object.assign({}, person, { name: 'Ariel' });
     // returns a new Person object with all other key-value pairs copied but just the name changed.
