@@ -120,16 +120,16 @@ person.greet()()
 ## Object Manipulation
 - Non-Destructive
   - Spread operator for an object:
-  ```javascript
-  const allCities = ['Los Angeles', ...coolCities];
-  allCities;
-  // => ["Los Angeles", "New York", "San Francisco"]
-  newAllCities = [...allCities]
-  // => ["Los Angeles", "New York", "San Francisco"]
-  allCities === newAllCities
-  // => false
+    ```javascript
+    const allCities = ['Los Angeles', ...coolCities];
+    allCities;
+    // => ["Los Angeles", "New York", "San Francisco"]
+    const newAllCities = [...allCities];
+    // => ["Los Angeles", "New York", "San Francisco"]
+    allCities === newAllCities;
+    // => false, newAllCities is a copy
 
-  ```
+    ```
   - Update an existing key-value pair with `Object.assign()`:
     ```javascript
     const newPerson = Object.assign({}, person, { name: 'Ariel' });
@@ -142,10 +142,9 @@ person.greet()()
     - `.slice(-1)` will remove the last element
     - `.slice()` always returns what you've selected
 - Destructive
-  - `.push()` Add to end of array
-  - `.unshift()` Add to beginning of array
-  - `.pop()` Remove from end of array
-  - `.shift() `Remove from beginning of the array
-  Notice that the return value for the .pop() and .shift() methods is the element that was removed.
-  - Update an existing key-value pair by setting that key to a new value.
-  - `delete [objName.key]` will delete the key-value pair from that object.
+  - `.push()` Add to end of array. Returns array length.
+  - `.unshift()` Add to beginning of array. Returns array length.
+  - `.pop()` Remove from end of array, returns the element that was removed.
+  - `.shift()` Remove from beginning of the array, returns the element that was removed.
+  - Update an existing key-value pair by setting that key to a new value. Returns new value.
+  - `delete [objName.key]` will delete the key-value pair from that object. Returns `true`.
