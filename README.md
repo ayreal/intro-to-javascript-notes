@@ -1,6 +1,7 @@
 ## Building Object Relations in JS
 
 ```javascript
+// User has-many Items, Item belongs-to a User
 
 let store = { users: [], items: [] };
 // initialize store with key of items and users that each point to an empty array
@@ -9,9 +10,9 @@ let userId = 0;
 
 class User {
   constructor(name) {
+    // increment first, then store the userId value to this.id
     this.id = ++userId;
     this.name = name;
-
     // insert in the user to the store
     store.users.push(this);
   }
@@ -42,6 +43,13 @@ class Item {
   setUser(user) {
     this.userId = user.id;
   }
+
+  // method to find user of an item -- only returns the first matching element from the array
+  user() {
+    return store.users.find(function(user) {
+      return user.id === this.userId;
+    });
+  }
 }
 
 let bobby = new User("bobby");
@@ -49,6 +57,16 @@ let trousers = new Item("trousers", 24, bobby);
 
 store;
 // {users: [{id: 1, name: 'Bobby'}], items: [{id: 1, name: 'trousers', price: 24, userId: 1}]}
+
+bobby = store.users[0];
+// User {id: 1, name: "bobby"}
+bobby.items();
+// Item {id: 1, name: 24, price: "trousers", userId: 1}
+
+let user = new User("Freddie");
+let item = new Item("socks", 3, user);
+item.user();
+// {id: 3, name: 'Freddie'}
 ```
 
 ## Lexical Scope (.bind, .call, .apply)
