@@ -136,10 +136,10 @@ person.greet()()
     // returns a new Person object with all other key-value pairs copied but just the name changed.
     ```
   - `.slice()`
-    - 0 arguments: `.slice()` will return a copy of the original array
-    - 2 arguments: `.slice(indexWhereToBeginSlice, indexBeforeWhichItShouldStop)`
-    - `.slice(1)` will remove the first element
-    - `.slice(-1)` will remove the last element
+    - `.slice()` Return a copy of the original array
+    - `.slice(indexWhereToBeginSlice, indexBeforeWhichItShouldStop)` Return a specific section
+    - `.slice(1)` Remove the first element
+    - `.slice(-1)` Remove the last element
     - `.slice()` always returns what you've selected
 - Destructive
   - `.push()` Add to end of array. Returns array length.
@@ -147,4 +147,4 @@ person.greet()()
   - `.pop()` Remove from end of array, returns the element that was removed.
   - `.shift()` Remove from beginning of the array, returns the element that was removed.
   - Update an existing key-value pair by setting that key to a new value. Returns new value.
-  - `delete [objName.key]` will delete the key-value pair from that object. Returns `true`.
+  - `delete [objName.key]` Delete the key-value pair from that object. Returns `true`.
