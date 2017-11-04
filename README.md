@@ -1,4 +1,71 @@
-## Building Object Relations in JS
+Functions
+======
+
+## Closures and Callbacks
+  - Callback methods are a specific application of an inner function being called. Therefore, `this` is also global inside of callbacks passed to our array iterator methods.
+  - Closures for privitization of variables
+    - Closures cannot access the outer function’s `this` variable by using the `this` keyword because the `this` variable is accessible only by the function itself, not by inner functions.
+
+## Lexical Scope (.bind, .call, .apply)
+- Set `this` value on methods
+  - When a function executes, it gets the `this` property, a variable with the value of the object that invokes the function where this is used. `this` is not assigned a value until an object invokes the function where `this` is defined.
+- Borrow methods
+
+## Arrow Functions
+
+```javascript
+// using our old standard function
+
+let arrowFunction = function() {
+  return "arrow Functions are great!"
+}
+
+// updating to use an arrow function
+let arrowFunction = () => {
+  return 'Arrow functions are great!'
+};
+```
+
+- Arrow functions are called just like regular functions.
+- Arrow functions without { } have implicit returns
+- All arrow functions are anonymous, but we can set a pointer to an arrow function or pass an arrow function through as an argument to another function
+```javascript
+let square = (n) => n * n
+square(3) // 9
+// Anonymous function with implicit return because no {}, assigned to a pointer 'let'
+
+```
+- Lexical scope: Within a closure, the inner function retains the scope of the method it was declared in if you use an arrow function. Here, the arrow function has an implicit .bind():
+```javascript
+let person = {
+  firstName: 'bob',
+  greet: function(){
+    return () => {
+      return `Hi, I'm ${this.firstName}`
+    }
+  }
+}
+person.greet()()
+// "Hi, I'm bob"
+```
+
+## Truthiness
+- In JavaScript, the following values are falsy: `false`, `null`, `undefined`, `0`, `NaN`, an empty string (, '', "")
+- Every other value is truthy.
+
+## Simple Iterators
+
+```javascript
+someArray.map( e => e * 2 ) // returns new array
+someArray.forEach( e => console.log(e)); // returns undefined
+someArray.filter( e => e.length > 0) // returns selected elements
+```
+
+
+OO Javascript
+======
+
+## Object Relations
 
 ```javascript
 // User has-many Items, Item belongs-to a User
@@ -68,64 +135,6 @@ item.user();
 // {id: 3, name: 'Freddie'}
 ```
 
-## Closures and Callbacks
-  - Callback methods are a specific application of an inner function being called. Therefore, `this` is also global inside of callbacks passed to our array iterator methods.
-  - Closures for privitization of variables
-    - Closures cannot access the outer function’s `this` variable by using the `this` keyword because the `this` variable is accessible only by the function itself, not by inner functions.
-
-## Lexical Scope (.bind, .call, .apply)
-- Set `this` value on methods
-  - When a function executes, it gets the `this` property, a variable with the value of the object that invokes the function where this is used. `this` is not assigned a value until an object invokes the function where `this` is defined.
-- Borrow methods
-
-## Arrow Functions
-
-```javascript
-// using our old standard function
-
-let arrowFunction = function() {
-  return "arrow Functions are great!"
-}
-
-// updating to use an arrow function
-let arrowFunction = () => {
-  return 'Arrow functions are great!'
-};
-```
-
-- Arrow functions are called just like regular functions.
-- Arrow functions without { } have implicit returns
-- All arrow functions are anonymous, but we can set a pointer to an arrow function or pass an arrow function through as an argument to another function
-```javascript
-let square = (n) => n * n
-square(3) // 9
-// Anonymous function with implicit return because no {}, assigned to a pointer 'let'
-
-```
-- Lexical scope: Within a closure, the inner function retains the scope of the method it was declared in if you use an arrow function. Here, the arrow function has an implicit .bind():
-```javascript
-let person = {
-  firstName: 'bob',
-  greet: function(){
-    return () => {
-      return `Hi, I'm ${this.firstName}`
-    }
-  }
-}
-person.greet()()
-// "Hi, I'm bob"
-```
-
-## Truthiness
-- In JavaScript, the following values are falsy: `false`, `null`, `undefined`, `0`, `NaN`, an empty string (, '', "")
-- Every other value is truthy.
-
-## Simple Iterators
-
-const newArray = someArray.map( (e) => e * 2 ) // returns new array
-someArray.forEach( e => console.log(e)); // returns undefined
-someArray.filter( e => e.length > 7)
-
 ## Object Manipulation
 - Non-Destructive
   - Spread operator for an object:
@@ -157,3 +166,5 @@ someArray.filter( e => e.length > 7)
   - `.shift()` Remove from beginning of the array, returns the element that was removed.
   - Update an existing key-value pair by setting that key to a new value. Returns new value.
   - `delete [objName.key]` Delete the key-value pair from that object. Returns `true`.
+
+#### Interacting With DOM
