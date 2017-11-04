@@ -1,5 +1,6 @@
-### This v. Self
- - Unlike Ruby's self, "this" is more tied to invocation context. Some of the different contexts are
+### This in JS
+Unlike Ruby's self, "this" is more tied to invocation context. Some of the different contexts are:
+
  - 1: As a function (baseless function)
  ```javascript
  function thisLogger() {
@@ -10,7 +11,7 @@
  ```javascript
  const object = {
    nameLogger: function() {
-     console.log(this.firstName)
+     console.log(this.firstName) // this is the nameLogger object
    }
  }
  ```
@@ -25,6 +26,7 @@
   addition.bind(whatThisIs, arg) //.bind is a function, not invoked
 
   ```
+
   ```javascript
   const listEmployees = function() {
     // here, .this is what we want
@@ -44,7 +46,7 @@
 const listEmployees = function() {
   this.employees.forEach(function(employee) {
     console.log(`Employee: ${employee.name} works at ${this.name}`);
-  }).bind(this);
+  }).bind(this); // using .bind
 };
 
 // OR with an arrow function. Arrow fn's have an implicit .bind. Arrow functions are generally good for callbacks for this reason
@@ -79,7 +81,7 @@ tgif.listEmployees()
 
       - When you invoke a new object with a constructor, it sets the new object to .this
       - javascript has prototypical inheritance, not class-ical inheritance
-      - eg you can add a method to Dog prototype with `Dog.prototype.rollOver =`. An instance of the dog doesn't necessarilty have to have this method, but its prototype will if you define it that way.
+      - eg you can add a method to Dog prototype with `Dog.prototype.rollOver =`. An instance of the dog doesn't necessarily have to have this method, but its prototype will if you define it that way.
 
  ```javascript
  class Dog {

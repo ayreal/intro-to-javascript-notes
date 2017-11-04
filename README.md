@@ -70,10 +70,13 @@ item.user();
 
 ## Closures and Callbacks
   - Callback methods are a specific application of an inner function being called. Therefore, `this` is also global inside of callbacks passed to our array iterator methods.
+  - Closures for privitization of variables
+    - Closures cannot access the outer function’s `this` variable by using the `this` keyword because the `this` variable is accessible only by the function itself, not by inner functions.
 
 ## Lexical Scope (.bind, .call, .apply)
-  - Set `this` value on methods
-  - Borrow methods
+- Set `this` value on methods
+  - When a function executes, it gets the `this` property, a variable with the value of the object that invokes the function where this is used. `this` is not assigned a value until an object invokes the function where `this` is defined.
+- Borrow methods
 
 ## Arrow Functions
 
@@ -116,6 +119,12 @@ person.greet()()
 ## Truthiness
 - In JavaScript, the following values are falsy: `false`, `null`, `undefined`, `0`, `NaN`, an empty string (, '', "")
 - Every other value is truthy.
+
+## Simple Iterators
+
+const newArray = someArray.map( (e) => e * 2 ) // returns new array
+someArray.forEach( e => console.log(e)); // returns undefined
+someArray.filter( e => e.length > 7)
 
 ## Object Manipulation
 - Non-Destructive
