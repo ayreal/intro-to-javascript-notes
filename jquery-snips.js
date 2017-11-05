@@ -12,3 +12,7 @@ commentForm.addEventListener("submit", function(e) {
 });
 
 // Using settimeout
+
+//
+
+someEvent.which; // returns the type of event that prompted

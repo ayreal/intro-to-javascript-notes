@@ -1,5 +1,4 @@
-Functions
-======
+# Functions
 
 ## Closures and Callbacks
   - Callback methods are a specific application of an inner function being called. Therefore, `this` is also global inside of callbacks passed to our array iterator methods.
@@ -59,11 +58,12 @@ person.greet()()
 someArray.map( e => e * 2 ) // returns new array
 someArray.forEach( e => console.log(e)); // returns undefined
 someArray.filter( e => e.length > 0) // returns selected elements
+numberArray.sort(compareNumbers) // takes compareNumbers as a callback and sorts from lowest to highest
+let compareNumbers = (a, b) => a - b;
 ```
 
 
-OO Javascript
-======
+# OO Javascript
 
 ## Object Relations
 
@@ -167,4 +167,56 @@ item.user();
   - Update an existing key-value pair by setting that key to a new value. Returns new value.
   - `delete [objName.key]` Delete the key-value pair from that object. Returns `true`.
 
-#### Interacting With DOM
+# Interacting With DOM
+
+## Accessing Remote APIs
+```HTML
+<div>
+  Issue Title: <input type="text" id="title"><br>
+  Issue Text: <input type="text" id="body"><br>
+  <a href="#" id="search" onclick="createIssue()">Create Issue</a>
+</div>
+<div id="issues"></div>
+```
+
+Submitting a POST request with form input:
+```javascript
+// POST request to submit form input
+function createIssue() {
+  const repo = "ayreal/javascript-fetch-lab";
+  const issue = {};
+  issue.title = document.getElementById("title").value;
+  issue.body = document.getElementById("body").value;
+  fetch(`https://api.github.com/repos/${repo}/issues`, {
+    method: "POST",
+    body: JSON.stringify(issue),
+    headers: {
+      Authorization: `token ${token}`
+    }
+  }).then(res => getIssues());
+}
+
+// GET request to fetch input from an API
+function getIssues() {
+  const repo = "ayreal/javascript-fetch-lab";
+  fetch(`https://api.github.com/repos/${repo}/issues`, {
+    headers: {
+      Authorization: `token ${token}`
+    }
+  })
+    .then(res => res.json()) // parse the response
+    .then(json => showIssues(json)); // pass parsed data to another function
+}
+
+// Format parsed data and display in the DOM
+function showIssues(issues) {
+  console.log(issues); // log the results to see them
+  issuesList = document.getElementById("issues");
+  // use forEach to create new elements and append them to an existing element
+  issues.forEach(issue => {
+    let newElement = document.createElement("li");
+    newElement.innerHTML = `${issue.title}: ${issue.body}`;
+    issuesList.appendChild(newElement);
+  });
+}
+```
