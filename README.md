@@ -179,7 +179,6 @@ item.user();
 <div id="issues"></div>
 ```
 
-Submitting a POST request with form input:
 ```javascript
 // POST request to submit form input
 function createIssue() {
@@ -219,4 +218,14 @@ function showIssues(issues) {
     issuesList.appendChild(newElement);
   });
 }
+```
+
+## Document Ready
+```javascript
+$(document).ready(function() {
+  // call functions here
+  submitForm();
+});
+  function submitForm(){ ... }
+// define functions here
 ```

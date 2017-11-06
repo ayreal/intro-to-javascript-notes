@@ -1,4 +1,5 @@
 #### Simple XHR
+Client by default does nothing with the response. We have to programatically tell the client what to do with the response.
 
 Generate a link to make the GET request to the API, and a div to store the results:
 ``` HTML
