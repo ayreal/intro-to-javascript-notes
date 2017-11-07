@@ -68,71 +68,91 @@ let compareNumbers = (a, b) => a - b;
 ## Object Relations
 
 ```javascript
-// User has-many Items, Item belongs-to a User
+// Driver and Passenger many-to-many joined on Trip
+let store = { drivers: [], passengers: [], trips: [] };
 
-let store = { users: [], items: [] };
-// initialize store with key of items and users that each point to an empty array
+// wrap the class in an IFFY to privitize the id counter
+const Driver = (() => {
+  let id = 1;
 
-let userId = 0;
-let itemId = 0;
+  return class Driver {
+    constructor(name) {
+      this.name = name;
+      this.id = id;
+      id++;
+      store.drivers.push(this);
+    }
 
-class User {
-  constructor(name) {
-    // increment first, then store the userId value to this.id
-    this.id = ++userId;
-    this.name = name;
-    // insert in the user to the store
-    store.users.push(this);
-  }
+    static all() {
+      return store.drivers;
+    }
 
-  // method to find items of a user
-  items() {
-    return store.items.filter(item => {
-      return item.userId === this.id;
-    });
-  }
-}
+    // filter to return join table results
+    trips() {
+      return store.trips.filter(trip => trip.driverId === this.id);
+    }
+    
+    // use those results to map through to the has-many relationship
+    passengers() {
+      return this.trips().map(trip => trip.passenger());
+    }
+  };
+})();
 
-class Item {
-  constructor(price, name, user) {
-    this.id = ++itemId;
-    this.name = name;
-    this.price = price;
-    // associate user with item by id
-    if (user) {
-      this.userId = user.id;
-    } // insert in the item to the store
-    store.items.push(this);
-  }
+const Passenger = (() => {
+  let id = 1;
 
-  // method to set the user for an item
-  setUser(user) {
-    this.userId = user.id;
-  }
+  return class Passenger {
+    constructor(name) {
+      this.name = name;
+      this.id = id;
+      id++;
+      store.passengers.push(this);
+    }
 
-  // method to find user of an item -- only returns the first matching element from the array
-  user() {
-    return store.users.find(function(user) {
-      return user.id === this.userId;
-    });
-  }
-}
+    static all() {
+      return store.passengers;
+    }
 
-let bobby = new User("bobby");
-let trousers = new Item("trousers", 24, bobby);
+    // filter to return join table results
+    trips() {
+      return store.trips.filter(trip => trip.passengerId === this.id);
+    }
 
-store;
-// {users: [{id: 1, name: 'Bobby'}], items: [{id: 1, name: 'trousers', price: 24, userId: 1}]}
+    // use those results to map through to the has-many relationship
+    drivers() {
+      return this.trips().map(trip => trip.driver());
+    }
+  };
+})();
 
-bobby = store.users[0];
-// User {id: 1, name: "bobby"}
-bobby.items();
-// Item {id: 1, name: 24, price: "trousers", userId: 1}
+const Trip = (() => {
+  let id = 1;
 
-let user = new User("Freddie");
-let item = new Item("socks", 3, user);
-item.user();
-// {id: 3, name: 'Freddie'}
+  return class Trip {
+    constructor(driver, passenger) {
+      this.driverId = driver.id;
+      this.passengerId = passenger.id;
+      this.id = id;
+      id++;
+      store.trips.push(this);
+    }
+
+    static all() {
+      return store.trips;
+    }
+
+    driver() {
+      return store.drivers.find(driver => driver.id === this.driverId);
+    }
+
+    passenger() {
+      return store.passengers.find(
+        passenger => passenger.id === this.passengerId
+      );
+    }
+  };
+})();
 ```
 
 ## Object Manipulation
@@ -191,18 +211,28 @@ function createIssue() {
     body: JSON.stringify(issue),
     headers: {
       Authorization: `token ${token}`
+      // 'Content-Type': 'application/json'
     }
   }).then(res => getIssues());
 }
 
 // GET request to fetch input from an API
 function getIssues() {
-  const repo = "ayreal/javascript-fetch-lab";
-  fetch(`https://api.github.com/repos/${repo}/issues`, {
+  fetch(`https://api.github.com/repos/`, {
     headers: {
       Authorization: `token ${token}`
     }
   })
+  // returns a promise object, aka something you can call .then on to trigger a callback
+    .then(res => res.json()) // parse the response
+    .then(json => showIssues(json)); // pass parsed data to another function
+}
+
+
+
+function getIssues() {
+  fetch(`url`)
+  // returns a promise object, aka something you can call .then on to trigger a callback
     .then(res => res.json()) // parse the response
     .then(json => showIssues(json)); // pass parsed data to another function
 }
@@ -218,6 +248,12 @@ function showIssues(issues) {
     issuesList.appendChild(newElement);
   });
 }
+```
+
+```javascript
+const alexsFetch = url => {
+  return fetch(url).then(res => res.json());
+};
 ```
 
 ## Document Ready

@@ -1,5 +1,5 @@
 #### Simple XHR
-Client by default does nothing with the response. We have to programatically tell the client what to do with the response.
+Client by default does nothing with the response. We have to programmatically tell the client what to do with the response.
 
 Generate a link to make the GET request to the API, and a div to store the results:
 ``` HTML
@@ -11,6 +11,7 @@ Generate a link to make the GET request to the API, and a div to store the resul
 function getRepositories() {
   const req = new XMLHttpRequest();
   req.addEventListener("load", showRepositories); // passing a callback to generate the response text
+  // Because the request is asynchronous, anything that depends on the response (eg showRepositories) must be inside the callback function.
   req.open("GET", "https://api.github.com/users/ayreal/repos"); // open the request
   req.send(); // send the request
 }
