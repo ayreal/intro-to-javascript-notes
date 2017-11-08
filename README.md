@@ -71,7 +71,7 @@ let compareNumbers = (a, b) => a - b;
 // Driver and Passenger many-to-many joined on Trip
 let store = { drivers: [], passengers: [], trips: [] };
 
-// wrap the class in an IFFY to privitize the id counter
+// wrap the class in an IFFY to privatize the id counter
 const Driver = (() => {
   let id = 1;
 
@@ -91,7 +91,7 @@ const Driver = (() => {
     trips() {
       return store.trips.filter(trip => trip.driverId === this.id);
     }
-    
+
     // use those results to map through to the has-many relationship
     passengers() {
       return this.trips().map(trip => trip.passenger());
@@ -255,10 +255,28 @@ const alexsFetch = url => {
   return fetch(url).then(res => res.json());
 };
 ```
+```javascript
+fetch(url).then(res=> res.json()).then(json => someFunc(json))
+```
 
 ## Document Ready
 ```javascript
+document.addEventListener("DOMContentLoaded", () => {
+  // function calls here
+});
+  // functions defined here
+```
+```javascript
 $(document).ready(function() {
+  // call functions here
+  submitForm();
+});
+  function submitForm(){ ... }
+// define functions here
+```
+... same as above
+```javascript
+$(function() {
   // call functions here
   submitForm();
 });
