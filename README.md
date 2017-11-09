@@ -228,8 +228,6 @@ function getIssues() {
     .then(json => showIssues(json)); // pass parsed data to another function
 }
 
-
-
 function getIssues() {
   fetch(`url`)
   // returns a promise object, aka something you can call .then on to trigger a callback
@@ -257,7 +255,18 @@ const alexsFetch = url => {
 ```
 ```javascript
 fetch(url).then(res=> res.json()).then(json => someFunc(json))
+// or
+fetch(url).then(res=>res.json()).then(res=> x = res)
 ```
+
+## Element Selectors
+`querySelector`
+  - eg `querySelector("#toc ul").getElementsByTagName("li")` This is a node list, change to Array.
+  - `querySelector("li:last-child")`
+`querySelectorAll`
+`getElement(s)ByTagName`
+`getElement(s)ByClassName`
+`~.style` Gives access to a lot of style attributes, such as color, display (none/block) etc.
 
 ## Document Ready
 ```javascript

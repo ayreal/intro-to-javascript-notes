@@ -17,3 +17,7 @@ $(this).serializeArray().forEach(input => {body[input.name] = input.value})
 Then make a post request to the same route, eg 'http://localhost:3000/animals'
 {method: "POST", body: JSON.stringify(body), headers:{'Content-Type': 'application/json', accept:'application/json'}}
 In the application_controler, you can tell Rails to ignore the CSRF authenticity token
+
+- Namspacing routes (under API)
+- Activemodel serializer gem
+- Handling errors with fetch response and bad commit actions
