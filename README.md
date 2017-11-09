@@ -220,6 +220,24 @@ function createIssue() {
   }).then(res => getIssues());
 }
 
+// POST request to submit form input -- Es refactor
+function createIssue(params) {
+  let headers = {
+    // Authorization: `token ${token}`
+    'Content-Type': 'application/json}'};
+  let body = JSON.stringify({
+    name = params.name,
+    age = params.name
+  });
+  fetch(`https://api.github.com/repos/${repo}/issues`, {
+    method: "POST",
+    body: body,
+    headers: headers,
+  }).then(res => res.json()).then(json => someFunc(json)) // after the response is received, do this thing, eg render response out on the page
+
+}
+
+
 // GET request to fetch input from an API
 function getIssues() {
   fetch(`https://api.github.com/repos/`, {
