@@ -1,3 +1,4 @@
+[link text](#oo-javascript)
 # Functions
 
 ## Closures and Callbacks
@@ -260,21 +261,23 @@ fetch(url).then(res=>res.json()).then(res=> x = res)
 ```
 
 ## Element Selectors
-`querySelector`
+- `querySelector`
   - eg `querySelector("#toc ul").getElementsByTagName("li")` This is a node list, change to Array.
   - `querySelector("li:last-child")`
-`querySelectorAll`
-`getElement(s)ByTagName`
-`getElement(s)ByClassName`
-`~.style` Gives access to a lot of style attributes, such as color, display (none/block) etc.
+- `querySelectorAll`
+- `getElement(s)ByTagName`
+- `getElement(s)ByClassName`
+- `~.style` Gives access to a lot of style attributes, such as color, display (none/block) etc.
 
 ## Document Ready
+Vanilla JS:
 ```javascript
 document.addEventListener("DOMContentLoaded", () => {
   // function calls here
 });
   // functions defined here
 ```
+jQuery
 ```javascript
 $(document).ready(function() {
   // call functions here
@@ -283,7 +286,7 @@ $(document).ready(function() {
   function submitForm(){ ... }
 // define functions here
 ```
-... same as above
+Another jQuery syntax
 ```javascript
 $(function() {
   // call functions here
