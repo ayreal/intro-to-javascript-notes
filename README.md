@@ -1,4 +1,7 @@
-[link text](#oo-javascript)
+#### toc
+- [OO Javascript](#oo-javascript)
+- [DOM](#interacting-with-dom)
+
 # Functions
 
 ## Closures and Callbacks
@@ -190,7 +193,7 @@ const Trip = (() => {
 
 # Interacting With DOM
 
-## Accessing Remote APIs
+## Fetch Request
 ```HTML
 <div>
   Issue Title: <input type="text" id="title"><br>
