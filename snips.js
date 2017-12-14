@@ -38,23 +38,10 @@ static makeList() {
 }
 
 
+// Traverse DOM to remove child elements
+const removeMe = document.querySelector('.remove_me');
+let parent = removeMe.parentElement;
+parent.removeChild(removeMe)
 
-const ROUTE = "https://ghibliapi.herokuapp.com";
-
-document.addEventListener("DOMContentLoaded", () => {
-  fetchMovies();
-});
-
-const fetchMovies = () => {
-  fetch(`${ROUTE}/films`)
-    .then(res => res.json())
-    .then(json => loadFunctions(json));
-};
-
-function loadFunctions(data) {
-  // make Movie objects
-  data.forEach(movie => new Movie(movie));
-
-  // attach listeners
-  // renderMovies();
-}
+.previousElementSibling //for the last li in a ul, for example
+,insertBefore

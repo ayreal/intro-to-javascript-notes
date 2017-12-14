@@ -21,3 +21,14 @@ In the application_controler, you can tell Rails to ignore the CSRF authenticity
 - Namspacing routes (under API)
 - Activemodel serializer gem
 - Handling errors with fetch response and bad commit actions
+
+
+### Only returning pertinent information to API
+```ruby
+def post_data
+  post = Post.find(params[:id])
+  #render json: PostSerializer.serialize(post)
+  render json: post.to_json(only: [:title, :description, :id],
+                            include: [ author: { only: [:name]}])
+end
+```
